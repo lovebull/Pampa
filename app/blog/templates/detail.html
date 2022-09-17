@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+
+{% block  maincontent_title %}
+
+{% endblock maincontent_title %}
+
+
+{% block miancontent %}
+
+    <div class="main-content">
+
+        <article>
+            <img loading="lazy" decoding="async" src="images/post/post-4.jpg" alt="Post Thumbnail" class="w-100">
+            <ul class="post-meta mb-2 mt-4">
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         style="margin-right:5px;margin-top:-4px" class="text-dark" viewBox="0 0 16 16">
+                        <path d="M5.5 10.5A.5.5 0 0 1 6 10h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>
+                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
+                        <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
+                    </svg>
+                    <span>{{ post.add_date.strftime("%Y-%m-%d ") }}</span>
+                </li>
+            </ul>
+            <h1 class="my-3"> {{ post.title }}</h1>
+            <ul class="post-meta mb-4">
+                <li><a href="/categories/destination">{{ post.category.name }}</a>
+                </li>
+
+                {% for tag in post.tags %}
+                    <a class="tags f-16" href="">{{ tag.name }}</a>
+                {% endfor %}
+
+            </ul>
+            <div class="content text-left">
+
+                {{ post.content|safe }}
+
+            </div>
+        </article>
+        <div class="mt-5">
+
+            <div id="disqus_thread"></div>
+
+            <!--comment 评论 start -->
+
+            <!--comment 评论 end -->
+
+        </div>
+
+
+        <!---->
+        <div class="mt-5 ">
+            <div class="float-left">
+                {% if prev_post %}
+                    上一篇：
+                    <a href="{{ url_for('blog.detail', cate_id=prev_post.category.id, post_id=prev_post.id) }}">{{ prev_post.title }}</a>
+                {% endif %}
+            </div>
+            <div class="float-right">
+                {% if next_post %}
+                    下一篇：
+                    <a href="{{ url_for('blog.detail', cate_id=next_post.category.id, post_id=next_post.id) }}">{{ next_post.title }}</a>
+                {% endif %}
+            </div>
+        </div>
+        <!---->
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,155 @@
+ {% extends "admin/admin_base.html" %}
+
+
+ {% block header %}
+  {{ super() }}
+ {% endblock %}
+
+
+{% block miancontent %}
+
+ <div class="container-xl">
+          <!-- Page title -->
+          <div class="page-header d-print-none">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <!-- Page pre-title -->
+                <div class="page-pretitle">
+                        添加
+                </div>
+                <h2 class="page-title">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item "><a href="/admin/banner" class="bg-azure-lt">轮播图列表</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"> 轮播图添加 </li>
+                        </ol>
+                    </nav>
+                </h2>
+              </div>
+              <!-- Page title actions -->
+              <div class="col-12 col-md-auto ms-auto d-print-none">
+                <div class="btn-list">
+
+                  <a href="{{url_for('admin.banner_add')}}" class="btn btn-primary d-none d-sm-inline-block" >
+                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
+                    继续添加
+                  </a>
+                  <a href="{{url_for('admin.banner_add')}}" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#modal-report" aria-label="Create new report">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+ </div>
+
+ <!-- 消息闪现 -->
+ {% include 'admin/common/flash.html' %}
+ <!-- 消息闪现 -->
+
+ <!-- 表单验证 -->
+  <div class="container-xl pt-3">
+     <!-- 表单验证 -->
+     {% if form.img.errors %}
+         <div class="alert alert-warning" role="alert">
+             <ul class="errors">
+                 {% for error in form.name.errors %}
+                     <li>{{ error }}</li>
+                 {% endfor %}
+             </ul>
+         </div>
+     {% endif %}
+ </div>
+<!-- 表单验证 -->
+
+  <div class="page-body">
+    <div class=" container-xl ">
+
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">添加轮播图</h3>
+                </div>
+                <div class="card-body">
+
+                  <form action="" method="POST" enctype="multipart/form-data">
+
+                      {{ form.csrf_token }}
+
+                    <div class="form-group mb-3 row">
+                      <label class="col-3 col-form-label required">图片</label>
+                      <div class="col">
+{#                        <input type="text" class="form-control" name="name"  placeholder="添加分类名称">#}
+                       {{ form.img(class='form-control' ,placeholder='图片地址') }}
+                        <small class="form-hint">We'll never share your email with anyone else.</small>
+                      </div>
+                    </div>
+
+
+
+         {% if form.img.data %}
+            <div class="form-group mb-3 row">
+                <label class="col-3 col-form-label required">*</label>
+                <div class="col-6 col-sm-4">
+                    <label class="form-imagecheck mb-2">
+                        <input name="form-imagecheck" type="checkbox" value="1" class="form-imagecheck-input">
+                        <span class="form-imagecheck-figure">
+                                 <img src="/uploads/{{ form.img.data }}" alt="" class="form-imagecheck-image">
+                       </span>
+                    </label>
+                </div>
+
+            </div>
+            {% endif %}
+
+
+                   <div class="form-group mb-3 row">
+                      <label class="col-3 col-form-label required">网址</label>
+                      <div class="col">
+{#                        <input type="text" class="form-control" name="name"  placeholder="添加分类名称">#}
+                       {{ form.url(class='form-control' ,placeholder='网址') }}
+                        <small class="form-hint">跳转的目标文章地址[URL].</small>
+                      </div>
+                    </div>
+
+
+                       <div class="form-group mb-3 row">
+                        <label class="col-3 form-label">简介 </label>
+                         <div class="col">
+                             <textarea class="form-control"  data-bs-toggle="autosize"  name="desc"   placeholder="简介">{% if form.desc.data %} {{ form.desc.data }} {% endif %}</textarea>
+
+                         </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                      <label class="col-3 col-form-label pt-0">状态：</label>
+                      <div class="col">
+
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio"   name="flexRadioDefault" id="flexRadioDefault1" checked>
+                          <span class="form-check-label" for="flexRadioDefault1">禁用</span>
+                        </label>
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio"   name="flexRadioDefault" id="flexRadioDefault2">
+                          <span class="form-check-label" for="flexRadioDefault2">启用</span>
+                        </label>
+
+                      </div>
+                    </div>
+
+
+                    <div class="form-footer">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+    </div>
+  </div>
+
+{% endblock %}

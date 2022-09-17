@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+
+{% block  maincontent_title %}
+    <div class="breadcrumbs mb-4"><a href="index.html">Home</a>
+        <span class="mx-1">/</span> <a href="#!">Tag</a>
+        <span class="mx-1">/</span> <a href="#!">{{ tag.name }}</a>
+    </div>
+
+    <h1 class="mb-4 border-bottom border-primary d-inline-block">{{ tag.name }}</h1>
+
+{% endblock maincontent_title %}
+
+{% block miancontent %}
+
+    <div class="row">
+
+
+        {% for post in post_list %}
+            <div class="col-md-6 mb-4">
+                <article class="card article-card article-card-sm h-100">
+                    <a href="{{ url_for('blog.detail',cate_id=post.category.id,post_id=post.id) }}">
+                        <div class="card-image">
+                            <div class="post-info"><span
+                                    class="text-uppercase">{{ post.pub_date.strftime("%Y-%m-%d ") }}</span>
+                                <span class="text-uppercase">3 minutes read</span>
+                            </div>
+                            <img loading="lazy" decoding="async"
+                                 src="{{ url_for('blog.static', filename='images/post/ls-2.jpg') }}"
+                                 alt="Post Thumbnail" class="w-100" width="420" height="280">
+                        </div>
+                    </a>
+                    <div class="card-body px-0 pb-0">
+                        <ul class="post-meta mb-2">
+                            <li><a href="#!"> {{ post.category.name }}</a>
+                                <a href="#!">news</a>
+                            </li>
+                        </ul>
+                        <h2><a class="post-title"
+                               href="{{ url_for('blog.detail',cate_id=post.category.id,post_id=post.id) }}"> {{ post.title }}</a>
+                        </h2>
+                        <p class="card-text"> {{ post.desc }} …</p>
+                        <div class="content"><a class="read-more-btn"
+                                                href="{{ url_for('blog.detail',cate_id=post.category.id,post_id=post.id) }}">Read
+                            Full Article</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        {% endfor %}
+
+
+ 
+    </div>
+
+{% endblock %}

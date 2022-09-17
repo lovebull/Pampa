@@ -1,0 +1,13 @@
+
+ <div class="container-xl pt-3">
+    
+     {% if form.name.errors %}
+         <div class="alert alert-warning" role="alert">
+             <ul class="errors">
+                 {% for error in form.name.errors %}
+                     <li>{{ error }}</li>
+                 {% endfor %}
+             </ul>
+         </div>
+     {% endif %}
+ </div>

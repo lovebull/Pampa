@@ -1,0 +1,302 @@
+{% extends "admin/admin_base.html" %}
+ {% block title %}
+     <title> 文章列表</title>
+ {% endblock %}
+
+
+{% block miancontent %}
+
+ <div class="container-xl">
+          <!-- Page title -->
+          <div class="page-header d-print-none">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <!-- Page pre-title -->
+                <div class="page-pretitle">
+                        添加
+                </div>
+                <h2 class="page-title">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item "><a href="/admin/category" class="bg-azure-lt">文章列表</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"> 文章添加 </li>
+                        </ol>
+                    </nav>
+                </h2>
+              </div>
+              <!-- Page title actions -->
+              <div class="col-12 col-md-auto ms-auto d-print-none">
+                <div class="btn-list">
+
+                  <a href="{{url_for('admin.category_add')}}" class="btn btn-primary d-none d-sm-inline-block" >
+                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
+                    继续添加分类
+                  </a>
+                  <a href="{{url_for('admin.category_add')}}" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#modal-report" aria-label="Create new report">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+ </div>
+
+ <!-- 消息闪现 -->
+ {% include 'admin/common/flash.html' %}
+ <!-- 消息闪现 -->
+
+ <!-- 表单验证 -->
+ <div class="container-xl pt-3">
+     <!-- 表单验证 -->
+     {% if form.title.errors %}
+         <div class="alert alert-warning" role="alert">
+             <ul class="errors">
+                 {% for error in form.title.errors %}
+                     <li>{{ error }}</li>
+                 {% endfor %}
+             </ul>
+         </div>
+     {% endif %}
+
+
+  {% if form.category_id.errors %}
+         <div class="alert alert-warning" role="alert">
+             <ul class="errors">
+                 {% for error in form.category_id.errors %}
+                     <li>{{ error }}</li>
+                 {% endfor %}
+             </ul>
+         </div>
+     {% endif %}
+
+
+  {% if form.content.errors %}
+         <div class="alert alert-warning" role="alert">
+             <ul class="errors">
+                 {% for error in form.content.errors %}
+                     <li>{{ error }}</li>
+                 {% endfor %}
+             </ul>
+         </div>
+     {% endif %}
+ </div>
+<!-- 表单验证 -->
+
+  <div class="page-body">
+    <div class=" container-xl ">
+
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">添加内容</h3>
+                </div>
+                <div class="card-body">
+
+                  <form action="" method="POST">
+
+                      {{ form.csrf_token }}
+
+                    <div class="form-group mb-3 row">
+                      <label class="col-3 col-form-label required">标题</label>
+                      <div class="col">
+{#                        <input type="text" class="form-control" name="name"  placeholder="添加分类名称">#}
+                       {{ form.title(class='form-control' ,placeholder='添加标题') }}
+                        <small class="form-hint">We'll never share your email with anyone else.</small>
+                      </div>
+                    </div>
+
+                    <div class="form-group mb-3 row">
+                      <label class="col-3 col-form-label required">Tags</label>
+                      <div class="col">
+                        <input type="text" class="form-control" placeholder="Tags">
+                         {{ form.tags(size='5') }}
+                        <small class="form-hint">
+                          Your password must be 8-20 characters long, contain letters and numbers, and must not contain
+                          spaces, special characters, or emoji.
+                        </small>
+                      </div>
+                    </div>
+
+
+                    <div class="form-group mb-3 row">
+                      <label class="col-3 col-form-label">分类</label>
+                      <div class="col">
+                         {{ form.category_id(class="form-select") }}
+                      </div>
+                    </div>
+
+
+                 <div class="form-group mb-3 row">
+                        <label class="col-3 form-label">文章内容</label>
+                         <div class="col">
+                        <textarea id='mytextarea' class="form-control" name="content"   placeholder="文章内容..">{% if form.content.data %}{{ form.content.data }}{% endif %}</textarea>
+                        {#  {{ form.content(id='mytextarea',class='form-control' ,rows="6",placeholder='文章内容..') }}#}
+
+                         </div>
+                    </div>
+
+                    <div class="form-group mb-3  row">
+                      <label class="col-3 col-form-label pt-0">文章状态：</label>
+                      <div class="col">
+
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio"   name="has_type"  value="draft" id="flexRadioDefault1" >
+                          <span class="form-check-label" for="flexRadioDefault1">草稿</span>
+                        </label>
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio"   name="has_type"  value="show" id="flexRadioDefault2" checked>
+                          <span class="form-check-label" for="flexRadioDefault2">发布</span>
+                        </label>
+
+                      </div>
+                    </div>
+
+
+
+                    <div class="form-group mb-3 row">
+                        <label class="col-3 form-label">文章摘要 </label>
+                         <div class="col">
+                             <textarea class="form-control"  data-bs-toggle="autosize"  name="desc"   placeholder="文章摘要">{% if form.desc.data %} {{ form.desc.data }} {% endif %}</textarea>
+
+                         </div>
+                    </div>
+
+
+                       <div class="form-group mb-3 row">
+
+                            <label class="col-3 form-label">发布时间</label>
+
+                           <div class="col">
+                                <div class="input-icon">
+
+                                  <span class="input-icon-addon"><!-- Download SVG icon from http://tabler-icons.io/i/calendar -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><rect x="4" y="5" width="16" height="16" rx="2" /><line x1="16" y1="3" x2="16" y2="7" /><line x1="8" y1="3" x2="8" y2="7" /><line x1="4" y1="11" x2="20" y2="11" /><line x1="11" y1="15" x2="12" y2="15" /><line x1="12" y1="15" x2="12" y2="18" /></svg>
+                                  </span>
+
+                                  <input class="form-control" name="pub_date" placeholder="Select a date" id="datepicker-icon-prepend" value=" {% if post %}{{ post.pub_date}}{% endif %}"/>
+
+                                </div>
+                            </div>
+                     </div>
+
+
+                    <div class="form-footer">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+    </div>
+  </div>
+
+{% endblock %}
+
+
+{% block  extra_foot_script %}
+
+<script type="text/javascript" src=" {{ url_for('admin.static', filename='js/jquery-3.6.1.min.js') }}"></script>
+ <script type="text/javascript" src=" {{ url_for('admin.static', filename='libs/tinymce/tinymce.min.js') }}"></script>
+  <script>
+  tinymce.init({
+    selector: '#mytextarea',
+    language:'zh_CN',
+    {#skin:'oxide-dark',#}
+    plugins: 'print preview searchreplace autolink directionality visualblocks visualchars fullscreen image link media template code codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists wordcount imagetools textpattern help emoticons autosave bdmap indent2em autoresize lineheight formatpainter axupimgs  paste ',
+   // toolbar: 'code undo redo | forecolor backcolor bold italic underline strikethrough link anchor | alignleft aligncenter alignright alignjustify outdent indent  | paste pastetext image',
+   toolbar: 'code undo redo | bold italic underline strikethrough  | alignleft aligncenter alignright alignjustify |  forecolor backcolor removeformat |  insertfile image media template link anchor codesample |  outdent indent |  numlist bullist | pagebreak | charmap emoticons | fullscreen  preview save print  | ltr rtl  | code paste pastetext',
+    height: 650, //编辑器高度
+    min_height: 400,
+    paste_data_images:true,//设置true即允许粘贴图片
+    browser_spellcheck:true, //拼写检查
+
+
+    /*content_css: [ //可设置编辑区内容展示的css，谨慎使用
+        '/static/reset.css',
+        '/static/ax.css',
+        '/static/css.css',
+    ],*/
+    fontsize_formats: '12px 14px 16px 18px 24px 36px 48px 56px 72px',
+    font_formats: '微软雅黑=Microsoft YaHei,Helvetica Neue,PingFang SC,sans-serif;苹果苹方=PingFang SC,Microsoft YaHei,sans-serif;宋体=simsun,serif;仿宋体=FangSong,serif;黑体=SimHei,sans-serif;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;Book Antiqua=book antiqua,palatino;',
+    /*link_list: [
+        { title: '预置链接1', value: 'http://www.tinymce.com' },
+        { title: '预置链接2', value: 'http://tinymce.ax-z.cn' }
+    ], */
+    /*image_list: [
+        { title: '预置图片1', value: 'https://www.tiny.cloud/images/glyph-tinymce@2x.png' },
+        { title: '预置图片2', value: 'https://www.baidu.com/img/bd_logo1.png' }
+    ],*/
+    convert_urls: false,
+    image_class_list: [
+    { title: 'None', value: '' },
+    { title: 'Some class', value: 'class-name' }
+    ],
+
+        //images_upload_url: '{{ url_for("admin.tinymce_upload") }}',
+        imagetools_toolbar: 'rotateleft rotateright | flipv fliph | editimage imageoptions',
+        images_upload_handler:function (blobInfo,success,failure){
+         console.log('上传ddddd ')
+         var  formData;
+          formData = new FormData();
+            //console.log(blobInfo.blob())
+             //console.log(blobInfo.filename())
+            {#console.log(formData)#}
+           formData.append('file', blobInfo.blob(), blobInfo.filename());
+           $.ajax({
+               url: "{{ url_for("admin.tinymce_upload") }}",
+               data:formData,
+               type:"POST",
+                cache: false,
+                contentType: false,
+                processData: false,
+               success:function(result){
+                   if(result['code']==200){
+                        console.log(result['location'])
+                        success(result['location']); //要将<img>标签的src属性替换为远程位置，请使用images_upload_handler函数中定义的成功回调与返回的 JSON 对象的位置属性。
+
+                   }else {
+                       console.log('上传失败ss');
+                       failure('上传失败ss');
+
+                   }
+
+            }});
+
+
+
+     }
+
+  });
+  </script>
+
+{#  <textarea id="mytextarea">Hello, World!</textarea>#}
+
+
+
+
+
+
+
+ <!--日期插件-->
+ <script type="text/javascript" src=" {{ url_for('admin.static', filename='libs/litepicker/dist/litepicker.js') }}"></script>
+  <script>
+    // @formatter:off
+    document.addEventListener("DOMContentLoaded", function () {
+    	window.Litepicker && (new Litepicker({
+    		element: document.getElementById('datepicker-icon-prepend'),
+    		buttonText: {
+    			previousMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="15 6 9 12 15 18" /></svg>`,
+    			nextMonth: `<!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="9 6 15 12 9 18" /></svg>`,
+    		},
+    	}));
+    });
+    // @formatter:on
+  </script>
+
+  <!--日期插件-->
+ {% endblock extra_foot_script %}

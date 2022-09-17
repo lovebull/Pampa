@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+
+  {% block title %}
+	<title>Reporter - HTML Blog Template</title>
+  {% endblock %}
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+	<meta name="description" content="This is meta description">
+	<meta name="author" content="Themefisher">
+	<link rel="shortcut icon" href="{{ url_for('blog.static', filename='images/favicon.png') }}" type="image/x-icon">
+	<link rel="icon" href="{{ url_for('blog.static', filename='images/favicon.png') }}" type="image/x-icon">
+
+{% block headjs %}
+	<!-- # Google Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Neuton:wght@700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+	<!-- # CSS Plugins -->
+     <link rel="stylesheet" href="{{ url_for('blog.static', filename='css/bootstrap.min.css') }}" />
+	<!-- # Main Style Sheet -->
+     <link rel="stylesheet" href="{{ url_for('blog.static', filename='css/style.css') }}" />
+ {% endblock %}
+
+</head>
+
+<body>
+
+ {% block header %}
+
+<header class="navigation">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light px-0">
+      <a class="navbar-brand order-1 py-0" href="/">
+        <img loading="prelaod" decoding="async" class="img-fluid" src="{{ url_for('blog.static', filename='images/logo.png') }} " alt="Reporter Hugo">
+
+      </a>
+      <div class="navbar-actions order-3 ml-0 ml-md-4">
+        <button aria-label="navbar toggler" class="navbar-toggler border-0" type="button" data-toggle="collapse"
+          data-target="#navigation"> <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      <form action="{{ url_for('blog.search') }}" class="search order-lg-3 order-md-2 order-3 ml-auto">
+        <input id="search-query" name="words" value="{{ words }}" type="search" placeholder="Search..." autocomplete="off">
+      </form>
+      <div class="collapse navbar-collapse text-center order-lg-2 order-4" id="navigation">
+        <ul class="navbar-nav mx-auto mt-3 mt-lg-0">
+
+       {% for cate in categorys %}
+
+          <li class="nav-item"> <a class="nav-link" {% if cate.id==cate_id %} style="color:#6383a8" {%  endif %} href="{{ url_for('blog.cate',cate_id=cate.id) }}">{{ cate.name }}</a>
+          </li>
+       {%  endfor %}
+
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+ {% endblock %}
+
+
+
+
+
+    <main>
+        <section class="section">
+            <div class="container">
+                <div class="row no-gutters-lg">
+
+
+                    <div class="col-12">
+
+                         {% block  maincontent_title %}{% endblock maincontent_title %}
+
+                    </div>
+
+                    <div class="col-lg-8 mb-5 mb-lg-0">
+                          {% block miancontent %}
+                          {% endblock miancontent %}
+                    </div>
+
+                    <div class="col-lg-4">
+
+                       {% include 'common/sidebar.html' %}
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block footer %}
+
+<footer class="bg-dark mt-5">
+  <div class="container section">
+    <div class="row">
+      <div class="col-lg-10 mx-auto text-center">
+        <a class="d-inline-block mb-4 pb-2" href="index.html">
+          <img loading="prelaod" decoding="async" class="img-fluid" src="{{ url_for('blog.static', filename='images/logo-white.png') }}" alt="Reporter Hugo">
+        </a>
+        <ul class="p-0 d-flex navbar-footer mb-0 list-unstyled">
+          <li class="nav-item my-0"> <a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item my-0"> <a class="nav-link" href="article.html">Elements</a></li>
+          <li class="nav-item my-0"> <a class="nav-link" href="privacy-policy.html">Privacy Policy</a></li>
+          <li class="nav-item my-0"> <a class="nav-link" href="terms-conditions.html">Terms Conditions</a></li>
+          <li class="nav-item my-0"> <a class="nav-link" href="404.html">404 Page</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="copyright bg-dark content">Designed &amp; Developed By <a href="https://themefisher.com/">Themefisher</a></div>
+</footer>
+
+{% endblock %}
+
+
+
+
+{% block footerscript %}
+<!-- # JS Plugins -->
+<script type="text/javascript" src=" {{ url_for('blog.static', filename='js/jquery.min.js') }}"></script>
+<script type="text/javascript" src=" {{ url_for('blog.static', filename='js/bootstrap.min.js') }}"></script>
+<!-- Main Script -->
+<script type="text/javascript" src=" {{ url_for('blog.static', filename='js/script.js') }}"></script>
+{% endblock %}
+
+
+</body>
+</html>
