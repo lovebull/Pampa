@@ -32,12 +32,12 @@
                 <div class="col">
                   <div class="mb-1">
                     <ol class="breadcrumb" aria-label="breadcrumbs">
-                      <li class="breadcrumb-item"><a href="#">Administration</a></li>
-                      <li class="breadcrumb-item active" aria-current="page"><a href="#">Settings</a></li>
+                      <li class="breadcrumb-item"><a href="#">用户</a></li>
+                      <li class="breadcrumb-item active" aria-current="page"><a href="#">添加/编辑</a></li>
                     </ol>
                   </div>
                   <h2 class="page-title">
-                    <span class="text-truncate">设置</span>
+                    <span class="text-truncate">会员信息</span>
                   </h2>
                 </div>
                 <div class="col-auto">
@@ -52,132 +52,141 @@
             <div class="row">
               <div class="col-12 col-md-4 px-4">
                 <div class="list-group list-group-transparent mb-3 ml-3">
-                  <a class="list-group-item list-group-item-action d-flex align-items-center   "
-					href="javascript:;" onclick="loadPage('account')" id="account">
-                    Account
-
-                  </a>
-                  <a class="list-group-item list-group-item-action d-flex align-items-center "
-					href="javascript:;" onclick="loadPage('preferences')" id="preferences">
-
-                    Preferences
-
-                  </a>
-                  <a class="list-group-item list-group-item-action d-flex align-items-center"
-					href="javascript：void(0);">
-                    Privacy Settings
-                    <small class="text-muted ms-auto">88</small>
-                  </a>
-                  <a class="list-group-item list-group-item-action d-flex align-items-center"
-					href="#">
-                    Theme
-                    <small class="text-muted ms-auto">54</small>
-                  </a>
-                  <a class="list-group-item list-group-item-action d-flex align-items-center"
-					href="#">
-                    Audience and visibility
-                    <small class="text-muted ms-auto">106</small>
-                  </a>
-                  <a class="list-group-item list-group-item-action d-flex align-items-center"
-					href="#">
-                    App Development
-                    <small class="text-muted ms-auto">40</small>
-                  </a>
+{#                  <a class="list-group-item list-group-item-action d-flex align-items-center   "#}
+{#					href="javascript:;" onclick="loadPage('account')" id="account">#}
+{#                    Account#}
+{##}
+{#                  </a>#}
+{#                  <a class="list-group-item list-group-item-action d-flex align-items-center "#}
+{#					href="javascript:;" onclick="loadPage('preferences')" id="preferences">#}
+{##}
+{#                    Preferences#}
+{##}
+{#                  </a>#}
+{#                  <a class="list-group-item list-group-item-action d-flex align-items-center"#}
+{#					href="javascript：void(0);">#}
+{#                    Privacy Settings#}
+{#                    <small class="text-muted ms-auto">88</small>#}
+{#                  </a>#}
+{#                  <a class="list-group-item list-group-item-action d-flex align-items-center"#}
+{#					href="#">#}
+{#                    Theme#}
+{#                    <small class="text-muted ms-auto">54</small>#}
+{#                  </a>#}
+{#                  <a class="list-group-item list-group-item-action d-flex align-items-center"#}
+{#					href="#">#}
+{#                    Audience and visibility#}
+{#                    <small class="text-muted ms-auto">106</small>#}
+{#                  </a>#}
+{#                  <a class="list-group-item list-group-item-action d-flex align-items-center"#}
+{#					href="#">#}
+{#                    App Development#}
+{#                    <small class="text-muted ms-auto">40</small>#}
+{#                  </a>#}
                 </div>
               </div>
               <div class="col-12 col-md-8">
                 <div class="row">
                   <div class="col-12" id="loadpage_right">
 
+                      <!--设置-->
 
-
-  <!--设置-->
                       <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Account</h3>
-                        </div>
-                        <div class="card-body">
+                          <div class="card-header">
+                              <h3 class="card-title">Account</h3>
+                          </div>
+                          <div class="card-body">
 
-        <form action="" method="POST" enctype="multipart/form-data">
+                              <form action=" " method="POST" enctype="multipart/form-data">
 
-            {{ form.csrf_token }}
-            <div class="form-group mb-3 row">
-                <label class="col-3 col-form-label required">用户名</label>
-                <div class="col">
-                    {#  <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">#}
-                     {{ form.username(class='form-control', placeholder='用户名') }}
-                    <small class="form-hint">We'll never share your email with anyone else.</small>
-                </div>
-            </div>
-            <div class="form-group mb-3 row">
-                <label class="col-3 col-form-label required">密码</label>
-                <div class="col">
-                {# <input type="password" class="form-control" placeholder="Password">#}
-                    {{ form.password(class='form-control', placeholder='密码') }}
-                    <small class="form-hint">
-                        Your password must be 8-20 characters long, contain letters and numbers, and must not contain
-                        spaces, special characters, or emoji.
-                    </small>
-                </div>
-            </div>
+                                  {{ form.csrf_token }}
+
+                                  <div class="form-group mb-3 row">
+                                      <label class="col-3 col-form-label required">用户名</label>
+                                      <div class="col">
+                                          {#  <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">#}
+                                          {{ form.username(class='form-control', placeholder='用户名') }}
+                                          <small class="form-hint">We'll never share your email with anyone
+                                              else.</small>
+                                      </div>
+                                  </div>
+                                  <div class="form-group mb-3 row">
+                                      <label class="col-3 col-form-label required">密码</label>
+                                      <div class="col">
+                                          {# <input type="password" class="form-control" placeholder="Password">#}
+                                          {{ form.password(class='form-control', placeholder='密码') }}
+                                          <small class="form-hint">
+                                              Your password must be 8-20 characters long, contain letters and numbers,
+                                              and must not contain
+                                              spaces, special characters, or emoji.
+                                          </small>
+                                      </div>
+                                  </div>
+
+                                  {#            <div class="form-group mb-3 row">#}
+                                  {#                <label class="col-3 col-form-label required">确认密码</label>#}
+                                  {#                <div class="col">#}
+                                  {#                    <input type="password" class="form-control" placeholder="Password">#}
+                                  {#                    <small class="form-hint">#}
+                                  {#                        Your password must be 8-20 characters long, contain letters and numbers, and must not contain#}
+                                  {#                        spaces, special characters, or emoji.#}
+                                  {#                    </small>#}
+                                  {#                </div>#}
+                                  {#            </div>#}
+
+                                  <div class="form-group mb-3 row">
+                                      <label class="col-3 col-form-label required">头像</label>
+                                      <div class="col">
+                                           <input type="file" class="form-control" name="avatar" id="avatar" value="{{  form.avatar.data }}"/>
+{#                                          {{ form.avatar(class='form-control',  placeholder='头像') }}#}
+                                          <small class="form-hint">
+                                              {{ form.avatar.description }}
+                                          </small>
+                                      </div>
+                                  </div>
 
 
+                                  {% if user %}
+                                      <div class="form-group mb-3 row">
+                                          <label class="col-3 col-form-label required">*</label>
+                                          <div class="col-6 col-sm-4">
+                                              <label class="form-imagecheck mb-2">
+                                                  <input name="form-imagecheck" type="checkbox" value="1"
+                                                         class="form-imagecheck-input">
+                                                  <span class="form-imagecheck-figure">
+                                                    <img src="/uploads/{{ user.avatar }}" alt="" class="form-imagecheck-image">
+                                                </span>
+                                              </label>
+                                          </div>
 
-           <div class="form-group mb-3 row">
-                <label class="col-3 col-form-label required">头像</label>
-                <div class="col">
-{#                   <input type="file" class="form-control"  placeholder='头像' name="avatar" />#}
-                   {{ form.avatar(class='form-control',  placeholder='头像') }}
-                    <small class="form-hint">
-                         {{ form.avatar.description }}
-                    </small>
-                </div>
-            </div>
+                                      </div>
+                                  {% endif %}
 
-            {% if user %}
-            <div class="form-group mb-3 row">
-                <label class="col-3 col-form-label required">*</label>
-                <div class="col-6 col-sm-4">
-                    <label class="form-imagecheck mb-2">
-                        <input name="form-imagecheck" type="checkbox" value="1" class="form-imagecheck-input">
-                        <span class="form-imagecheck-figure">
-                                 <img src="/uploads/{{ user.avatar }}" alt="" class="form-imagecheck-image">
-                       </span>
-                    </label>
-                </div>
 
-            </div>
-            {% endif %}
+                                  <div class="form-group row">
+                                      <label class="col-3 col-form-label pt-0">系统参数[多选]</label>
+                                      <div class="col">
+                                          <label class="form-check">                                               
+                                              {{ form.is_super_user(class='form-check-input') }}
+                                              {{ form.is_super_user.label(class='form-check-label') }}
+                                          </label>
+                                          <label class="form-check">                                               
+                                              {{ form.is_active(class='form-check-input') }}
+                                              {{ form.is_active.label(class='form-check-label') }}
+                                          </label>
+                                          <label class="form-check">                                            
+                                              {{ form.is_staff(class='form-check-input') }}
+                                              {{ form.is_staff.label(class='form-check-label') }}
+                                          </label>
+                                      </div>
+                                  </div>
+                                  <div class="form-footer">
+                                      <button type="submit" class="btn btn-primary">Submit</button>
+                                  </div>
+                              </form>
+                          </div>
+                      </div>
 
-            <div class="form-group row">
-                <label class="col-3 col-form-label pt-0">Checkboxes</label>
-                <div class="col">
-                    <label class="form-check">
-{#                        <input class="form-check-input" type="checkbox" checked="">#}
-{#                        <span class="form-check-label">Option 1</span>#}
-                        {{ form.is_super_user(class='form-check-input') }}
-                        {{ form.is_super_user.label(class='form-check-label') }}
-                    </label>
-                    <label class="form-check">
-{#                        <input class="form-check-input" type="checkbox">#}
-{#                        <span class="form-check-label">Option 2</span>#}
-                            {{ form.is_active(class='form-check-input') }}
-                            {{ form.is_active.label(class='form-check-label') }}
-                    </label>
-                    <label class="form-check">
-{#                        <input class="form-check-input" type="checkbox" disabled="">#}
-{#                        <span class="form-check-label">Option 3</span>#}
-                            {{ form.is_staff(class='form-check-input') }}
-                {{ form.is_staff.label(class='form-check-label') }}
-                    </label>
-                </div>
-            </div>
-            <div class="form-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </form>
-    </div>
-</div>
                       <!--设置-->
 
 
@@ -187,23 +196,17 @@
             </div>
           </div>
 
-
-
     </div>
 
 {% endblock %}
-
 
 
 {% block footer %}
         {{ super() }}
 {% endblock %}
 
-
-{% block footerscript %}
+  {% block  extra_foot_script %}
 <!-- Libs JS -->
-
-
      <script type="text/javascript" src=" {{ url_for('admin.static', filename='js/jquery-3.6.1.min.js') }}"></script>
     <script>
     function  loadPage(url){
@@ -229,5 +232,4 @@
     }
 
     </script>
-
-{% endblock %}
+  {% endblock extra_foot_script %}

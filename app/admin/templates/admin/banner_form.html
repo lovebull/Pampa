@@ -5,7 +5,6 @@
   {{ super() }}
  {% endblock %}
 
-
 {% block miancontent %}
 
  <div class="container-xl">
@@ -81,7 +80,6 @@
                     <div class="form-group mb-3 row">
                       <label class="col-3 col-form-label required">图片</label>
                       <div class="col">
-{#                        <input type="text" class="form-control" name="name"  placeholder="添加分类名称">#}
                        {{ form.img(class='form-control' ,placeholder='图片地址') }}
                         <small class="form-hint">We'll never share your email with anyone else.</small>
                       </div>
@@ -108,7 +106,6 @@
                    <div class="form-group mb-3 row">
                       <label class="col-3 col-form-label required">网址</label>
                       <div class="col">
-{#                        <input type="text" class="form-control" name="name"  placeholder="添加分类名称">#}
                        {{ form.url(class='form-control' ,placeholder='网址') }}
                         <small class="form-hint">跳转的目标文章地址[URL].</small>
                       </div>

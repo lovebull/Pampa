@@ -9,14 +9,9 @@
 
  {% endblock %}
 
-
-
-
 {% block miancontent %}
 
     <div class="page-body">
-
-
     <div class=" container-xl ">
         <div class="col-12 p-3">
               <a href="{{url_for('admin.user_add')}}" class="btn btn-info ">添加用户</a>
@@ -108,11 +103,8 @@
                                          </div>
                                      </td>
 
-
                                 </tr>
-
                                 {% endfor %}
-
 
                               </tbody>
                             </table>
@@ -161,7 +153,8 @@
                                       {% else %}
                                           <span class=pagination-ellipsis>&hellip;</span>
                                       {% endif %}
-                                  {% endfor %}                    
+                                  {% endfor %}
+
                                   {% if pagination.has_next %}
                                       <li class="page-item">
                                           <a class="page-link"

@@ -4,7 +4,7 @@
     </div>
     <div class="card-body">
 
-        <form action="{{ url_for('admin.user_add') }}" method="POST">
+        <form action="{{ url_for('admin.user_add') }}" method="POST" enctype="multipart/form-data">
 
             {{ form.csrf_token }}
             <div class="form-group mb-3 row">
@@ -48,6 +48,22 @@
                     </small>
                 </div>
             </div>
+
+
+         {% if user %}
+            <div class="form-group mb-3 row">
+                <label class="col-3 col-form-label required">*</label>
+                <div class="col-6 col-sm-4">
+                    <label class="form-imagecheck mb-2">
+                        <input name="form-imagecheck" type="checkbox" value="1" class="form-imagecheck-input">
+                        <span class="form-imagecheck-figure">
+                                 <img src="/uploads/{{ user.avatar }}" alt="" class="form-imagecheck-image">
+                       </span>
+                    </label>
+                </div>
+
+            </div>
+        {% endif %}
 
 
             <div class="form-group row">

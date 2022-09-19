@@ -5,11 +5,6 @@
   {{ super() }}
  {% endblock %}
 
-
-
-
-
-
 {% block miancontent %}
 
  <div class="container-xl">
@@ -74,7 +69,6 @@
                     <div class="form-group mb-3 row">
                       <label class="col-3 col-form-label required">标签名</label>
                       <div class="col">
-{#                        <input type="text" class="form-control" name="name"  placeholder="添加分类名称">#}
                        {{ form.name(class='form-control' ,placeholder='标签名') }}
                         <small class="form-hint">We'll never share your email with anyone else.</small>
                       </div>

@@ -2,6 +2,8 @@ import os
 import  uuid
 from werkzeug.utils import secure_filename
 from RealProject.settings import  BASE_DIR
+
+
 def _file_path(directory_name):
     file_path = BASE_DIR / f'uploads/{directory_name}'
     if os.path.exists(file_path) is False:
